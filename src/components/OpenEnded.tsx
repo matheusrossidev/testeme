@@ -71,7 +71,7 @@ const OpenEnded = ({ game }: Props) => {
     checkAnswer(undefined, {
       onSuccess: ({ percentageSimilar }) => {
         toast({
-          title: `Sua resposta é ${percentageSimilar}% similar a resposta correta.`,
+          title: `Your answer is ${percentageSimilar}% similar to the correct answer`,
         });
         setAveragePercentage((prev) => {
           return (prev + percentageSimilar) / (questionIndex + 1);
@@ -86,7 +86,7 @@ const OpenEnded = ({ game }: Props) => {
       onError: (error) => {
         console.error(error);
         toast({
-          title: "Deu ruim aqui mané.",
+          title: "Something went wrong",
           variant: "destructive",
         });
       },
@@ -109,14 +109,14 @@ const OpenEnded = ({ game }: Props) => {
     return (
       <div className="absolute flex flex-col justify-center -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
         <div className="px-4 py-2 mt-2 font-semibold text-white bg-green-500 rounded-md whitespace-nowrap">
-          Você completou em {" "}
+          You Completed in{" "}
           {formatTimeDelta(differenceInSeconds(now, game.timeStarted))}
         </div>
         <Link
           href={`/statistics/${game.id}`}
           className={cn(buttonVariants({ size: "lg" }), "mt-2")}
         >
-          Ver estatisticas
+          View Statistics
           <BarChart className="w-4 h-4 ml-2" />
         </Link>
       </div>
@@ -129,7 +129,7 @@ const OpenEnded = ({ game }: Props) => {
         <div className="flex flex-col">
           {/* topic */}
           <p>
-            <span className="text-slate-400">Assunto</span> &nbsp;
+            <span className="text-slate-400">Topic</span> &nbsp;
             <span className="px-2 py-1 text-white rounded-lg bg-slate-800">
               {game.topic}
             </span>
@@ -168,7 +168,7 @@ const OpenEnded = ({ game }: Props) => {
           }}
         >
           {isChecking && <Loader2 className="w-4 h-4 mr-2 animate-spin" />}
-          Proxima <ChevronRight className="w-4 h-4 ml-2" />
+          Next <ChevronRight className="w-4 h-4 ml-2" />
         </Button>
       </div>
     </div>
