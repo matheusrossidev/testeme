@@ -10,7 +10,7 @@ export async function POST(req: Request, res: Response) {
     const session = await getAuthSession();
     if (!session?.user) {
       return NextResponse.json(
-        { error: "Você precisa estar logado para criar um teste" },
+        { error: "You must be logged in to create a game." },
         {
           status: 401,
         }
@@ -107,7 +107,7 @@ export async function POST(req: Request, res: Response) {
       );
     } else {
       return NextResponse.json(
-        { error: "Algo de errado não está certo." },
+        { error: "An unexpected error occurred." },
         {
           status: 500,
         }
@@ -120,7 +120,7 @@ export async function GET(req: Request, res: Response) {
     const session = await getAuthSession();
     if (!session?.user) {
       return NextResponse.json(
-        { error: "Você precisa estar logado para criar testes." },
+        { error: "You must be logged in to create a game." },
         {
           status: 401,
         }
@@ -130,7 +130,7 @@ export async function GET(req: Request, res: Response) {
     const gameId = url.searchParams.get("gameId");
     if (!gameId) {
       return NextResponse.json(
-        { error: "Você precisa informar o id do teste." },
+        { error: "You must provide a game id." },
         {
           status: 400,
         }
@@ -147,7 +147,7 @@ export async function GET(req: Request, res: Response) {
     });
     if (!game) {
       return NextResponse.json(
-        { error: "Teste não encontrado." },
+        { error: "Game not found." },
         {
           status: 404,
         }
@@ -162,7 +162,7 @@ export async function GET(req: Request, res: Response) {
     );
   } catch (error) {
     return NextResponse.json(
-      { error: "Algo de errado não está certo." },
+      { error: "An unexpected error occurred." },
       {
         status: 500,
       }
