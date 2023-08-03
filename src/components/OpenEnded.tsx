@@ -44,20 +44,21 @@ const OpenEnded = ({ game }: Props) => {
   const { toast } = useToast();
   const [now, setNow] = React.useState(new Date());
   const { mutate: checkAnswer, isLoading: isChecking } = useMutation({
-    mutationFn: async () => {
-      let filledAnswer = blankAnswer;
-      document.querySelectorAll("#user-blank-input").forEach((input) => {
-        filledAnswer = filledAnswer.replace("_____", input.value);
-        input.value = "";
-      });
-      const payload: z.infer<typeof checkAnswerSchema> = {
-        questionId: currentQuestion.id,
-        userInput: filledAnswer,
-      };
-      const response = await axios.post(`/api/checkAnswer`, payload);
-      return response.data;
-    },
-  });
+  mutationFn: async () => {
+    let filledAnswer = blankAnswer;
+    document.querySelectorAll<HTMLInputElement>("#user-blank-input").forEach((input) => {
+      filledAnswer = filledAnswer.replace("_______", input.value);
+      input.value = "";
+    });
+    const payload: z.infer<typeof checkAnswerSchema> = {
+      questionId: currentQuestion.id,
+      userInput: filledAnswer,
+    };
+    const response = await axios.post(`/api/checkAnswer`, payload);
+    return response.data;
+  },
+});
+
   React.useEffect(() => {
     if (!hasEnded) {
       const interval = setInterval(() => {
